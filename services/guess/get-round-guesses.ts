@@ -1,6 +1,26 @@
 import { prisma } from "@/prisma/prisma";
 
-export async function getRoundGuesses(round: string) {
+type RoundGuesses = {
+  user: {
+    id: string;
+    username: string;
+  };
+  guesses: {
+    id: string;
+    score1: number;
+    score2: number;
+    match: {
+      team1: {
+        name: string;
+      };
+      team2: {
+        name: string;
+      };
+    };
+  }[];
+};
+
+export async function getRoundGuesses(round: string): Promise<RoundGuesses[]> {
   const guesses = await prisma.guess.findMany({
     where: {
       match: {
@@ -28,33 +48,31 @@ export async function getRoundGuesses(round: string) {
     },
   });
 
-  type Guess = (typeof guesses)[number];
-
-  return Object.values(
-    guesses.reduce<
-      Record<
-        string,
-        {
-          user: {
-            id: string;
-            username: string;
-          };
-          guesses: Guess[];
-        }
-      >
-    >((acc, guess) => {
-      const userId = guess.user.id;
-
-      if (!acc[userId]) {
-        acc[userId] = {
-          user: guess.user,
-          guesses: [],
+  const grouped = guesses.reduce<
+    Record<
+      string,
+      {
+        user: {
+          id: string;
+          username: string;
         };
+        guesses: typeof guesses;
       }
+    >
+  >((acc, guess) => {
+    const userId = guess.user.id;
 
-      acc[userId].guesses.push(guess);
+    if (!acc[userId]) {
+      acc[userId] = {
+        user: guess.user,
+        guesses: [],
+      };
+    }
 
-      return acc;
-    }, {}),
-  );
+    acc[userId].guesses.push(guess);
+
+    return acc;
+  }, {});
+
+  return Object.values(grouped);
 }
