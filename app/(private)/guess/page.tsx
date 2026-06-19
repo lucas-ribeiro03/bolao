@@ -21,7 +21,7 @@ export default async function GuessesPage() {
   const currentRound = await getCurrentRound();
 
   const alreadyGuessed = await hasUserGuessedRound(
-    session.user.id,
+    session.user.id!,
     currentRound,
   );
 

@@ -17,6 +17,9 @@ import { calculateRanking } from "@/lib/calculate-ranking";
 export default async function HomePage() {
   const session = await auth();
 
+  if (!session || !session.user?.id) {
+    return null;
+  }
   const [users, guesses, matches, nextMatch] = await Promise.all([
     getUsers(),
     getGuesses(),
@@ -30,8 +33,10 @@ export default async function HomePage() {
     matches,
   });
 
+  const userId = session.user.id;
+
   const guess = nextMatch
-    ? await getGuessByUserAndMatch(session!.user.id, nextMatch.id)
+    ? await getGuessByUserAndMatch(userId, nextMatch.id)
     : null;
 
   return (

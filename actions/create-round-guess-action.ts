@@ -47,7 +47,7 @@ export async function createRoundGuessesAction(guesses: GuessInput[]) {
   }
 
   const alreadyGuessed = await hasUserGuessedRound(
-    session.user.id,
+    session.user.id!,
     firstMatch.round,
   );
 
@@ -66,7 +66,7 @@ export async function createRoundGuessesAction(guesses: GuessInput[]) {
   }
 
   await createRoundGuesses({
-    userId: session.user.id,
+    userId: session.user.id!,
     guesses,
   });
 

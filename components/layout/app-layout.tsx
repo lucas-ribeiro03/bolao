@@ -17,12 +17,16 @@ type AppLayoutProps = {
 export async function AppLayout({ children }: AppLayoutProps) {
   const session = await auth();
 
+  if (!session?.user) {
+    return <LoginPage />;
+  }
+
   return (
     <SidebarProvider>
-      <AppSidebar username={session!.user.username} role={session!.user.role} />
+      <AppSidebar username={session.user.username} role={session.user.role} />
 
       <SidebarInset>
-        <MobileNavbar role={session!.user.role} />
+        <MobileNavbar role={session.user.role} />
 
         <main className="flex-1 p-4 md:p-6">{children}</main>
       </SidebarInset>

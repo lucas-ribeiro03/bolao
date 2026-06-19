@@ -1,5 +1,5 @@
 // service/guess/update-match-guesses.ts
-import { GuessResult } from "@/app/generated/prisma/enums";
+import { GuessResult } from "@prisma/client";
 
 import { prisma } from "@/prisma/prisma";
 
