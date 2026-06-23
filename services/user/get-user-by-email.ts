@@ -5,5 +5,13 @@ export async function getUserByEmail(email: string) {
     where: {
       email,
     },
+
+    select: {
+      email: true,
+      password: true,
+      username: true,
+      role: true,
+      id: true,
+    },
   });
 }

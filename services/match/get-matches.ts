@@ -9,9 +9,10 @@ export async function getMatches({ round }: GetAllMatchesParams = {}) {
     where: {
       ...(round && { round }),
     },
-    include: {
-      team1: true,
-      team2: true,
+    select: {
+      id: true,
+      score1: true,
+      score2: true,
     },
     orderBy: [
       {

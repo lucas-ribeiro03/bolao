@@ -5,5 +5,9 @@ export async function getUserByUsername(username: string) {
     where: {
       username,
     },
+
+    select: {
+      username: true,
+    },
   });
 }

@@ -1,9 +1,9 @@
-import { prisma } from "@/prisma/prisma";
+// import { prisma } from "@/prisma/prisma";
 
-export async function getUserById(id: string) {
-  return prisma.user.findUnique({
-    where: {
-      id,
-    },
-  });
-}
+// export async function getUserById(id: string) {
+//   return prisma.user.findUnique({
+//     where: {
+//       id,
+//     },
+//   });
+// }

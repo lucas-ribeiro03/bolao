@@ -1,9 +1,9 @@
-import { prisma } from "@/prisma/prisma";
+// import { prisma } from "@/prisma/prisma";
 
-export async function listTeams() {
-  return prisma.team.findMany({
-    orderBy: {
-      name: "asc",
-    },
-  });
-}
+// export async function listTeams() {
+//   return prisma.team.findMany({
+//     orderBy: {
+//       name: "asc",
+//     },
+//   });
+// }

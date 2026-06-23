@@ -2,14 +2,11 @@ import { prisma } from "@/prisma/prisma";
 
 export async function getGuesses() {
   return await prisma.guess.findMany({
-    include: {
-      user: true,
-      match: {
-        include: {
-          team1: true,
-          team2: true,
-        },
-      },
+    select: {
+      userId: true,
+      matchId: true,
+      score1: true,
+      score2: true,
     },
   });
 }

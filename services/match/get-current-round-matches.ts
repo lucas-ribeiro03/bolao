@@ -11,9 +11,12 @@ export async function getCurrentRoundMatches() {
     where: {
       round: settings.currentRound,
     },
-    include: {
+    select: {
+      id: true,
       team1: true,
       team2: true,
+      matchDateTime: true,
+      round: true,
     },
     orderBy: {
       matchDateTime: "asc",

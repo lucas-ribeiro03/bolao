@@ -8,5 +8,10 @@ export async function getGuessByUserAndMatch(userId: string, matchId: string) {
         matchId,
       },
     },
+
+    select: {
+      score1: true,
+      score2: true,
+    },
   });
 }
