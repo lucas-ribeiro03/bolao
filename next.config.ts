@@ -1,4 +1,6 @@
-const nextConfig = {
+import { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
@@ -9,6 +11,7 @@ const nextConfig = {
       },
     ],
   },
+  cacheComponents: true,
 };
 
 module.exports = nextConfig;
