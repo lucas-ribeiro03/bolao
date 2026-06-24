@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 
 import { updateMatchSchema } from "@/schemas/update-match-schema";
 
@@ -33,6 +33,9 @@ export async function updateMatchAction(data: Input) {
   revalidatePath("/");
   revalidatePath("/admin/matches");
   revalidatePath("/guesses");
+  updateTag("matches");
+  updateTag("guesses");
+  updateTag("next-match");
 
   return {
     success: true,

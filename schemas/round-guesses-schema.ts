@@ -5,9 +5,9 @@ export const roundGuessesSchema = z.object({
     z.object({
       matchId: z.string().min(1),
 
-      score1: z.number().int().min(0).max(3),
+      score1: z.number().int().min(0),
 
-      score2: z.number().int().min(0).max(3),
+      score2: z.number().int().min(0),
     }),
   ),
 });

@@ -2,7 +2,7 @@
 
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 
 import { updateCurrentRoundSchema } from "@/schemas/update-current-round";
 
@@ -24,6 +24,10 @@ export async function updateCurrentRoundAction(data: FormData) {
   revalidatePath("/");
   revalidatePath("/guesses");
   revalidatePath("/admin/settings");
+  updateTag("current-round");
+  updateTag("system-settings");
+  updateTag("current-round-matches");
+  updateTag("matches");
 
   return {
     success: true,

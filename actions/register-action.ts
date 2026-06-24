@@ -7,6 +7,7 @@ import { getUserByEmail } from "@/services/user/get-user-by-email";
 import { getUserByUsername } from "@/services/user/get-user-by-username";
 
 import { registerSchema } from "@/schemas/register-schema";
+import { updateTag } from "next/cache";
 
 export async function registerAction(formData: FormData) {
   const values = registerSchema.parse({
@@ -40,6 +41,8 @@ export async function registerAction(formData: FormData) {
     email: values.email,
     password: passwordHash,
   });
+
+  updateTag("users");
 
   return {
     success: true,

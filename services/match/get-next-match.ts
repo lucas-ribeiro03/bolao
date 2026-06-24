@@ -1,6 +1,9 @@
+"use cache";
 import { prisma } from "@/prisma/prisma";
+import { cacheTag } from "next/cache";
 
 export async function getNextMatch() {
+  cacheTag("next-match");
   return await prisma.match.findFirst({
     where: {
       matchDateTime: {
