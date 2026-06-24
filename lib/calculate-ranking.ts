@@ -7,6 +7,7 @@ type Match = {
   id: string;
   score1: number | null;
   score2: number | null;
+  finished: boolean;
 };
 
 type Guess = {
@@ -71,6 +72,8 @@ export function calculateRanking({
         points += 1;
       }
     }
+
+    console.log(points);
 
     return {
       id: user.id,
