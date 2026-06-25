@@ -14,8 +14,6 @@ type GuessInput = {
 
 export async function createRoundGuessesAction(guesses: GuessInput[]) {
   const session = await auth();
-  console.log("Entrei na action");
-  console.log(guesses);
 
   if (!session?.user) {
     return {
