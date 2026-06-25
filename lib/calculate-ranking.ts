@@ -52,7 +52,14 @@ export function calculateRanking({
         continue;
       }
 
-      if (match.score1 === null || match.score2 === null) {
+      console.log(match);
+
+      if (
+        match.score1 === null ||
+        match.score2 === null ||
+        match.finished !== true
+      ) {
+        console.log(match.finished, typeof match.finished);
         continue;
       }
 
