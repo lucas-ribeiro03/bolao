@@ -37,7 +37,12 @@ export async function createRoundGuessesAction(guesses: GuessInput[]) {
     firstMatch.matchDateTime.getTime() - 10 * 60 * 1000,
   );
 
-  if (new Date() >= lockDate) {
+  const now = new Date(new Date().getTime() - 18 * 10 * 60 * 1000);
+
+  console.log("Limite:", lockDate);
+  console.log("Agora:", now);
+
+  if (now >= lockDate) {
     return {
       success: false,
       message: "O prazo para envio dos palpites foi encerrado.",

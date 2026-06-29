@@ -785,46 +785,162 @@ import { GuessResult } from "@prisma/client";
 // })();
 
 //
-const matchesTest = [
+// const matchesTest = [
+//   {
+//     team1Id: "e47c69f0-bfd9-44fb-8300-829ea806401e",
+//     team2Id: "eaf0a116-6b1c-4e28-989e-56538d08c294",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-28T16:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "a60c3370-16d1-4abd-bea6-9980beb3cff0",
+//     team2Id: "f233b3b5-5ba3-4507-81a6-86e1c71beda8",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-29T14:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "7ef8d3f9-cf9b-45ed-844b-79be98f224f2",
+//     team2Id: "751ed56f-65f5-41fa-bbf4-b6432c8b2b09",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-29T17:30:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "7cc81f71-8491-4e00-8947-7a95e18239c4",
+//     team2Id: "f2f11145-276b-4e11-9bd4-28c0535923ed",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-29T22:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "f00bccac-2cdb-49fa-bbc7-5d5b08290739",
+//     team2Id: "e95ff731-f466-4282-8e64-6e579a94a15f",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-30T14:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "94084ee4-bfb8-4d3e-975d-ca238346934b",
+//     team2Id: "ba2d31c3-ce78-40a8-b608-8e42b075b75e",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-30T18:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "e3c45336-df79-4f9b-bbd4-ad8ec35d9d13",
+//     team2Id: "4b4acc12-66ce-4010-9756-f9850f51988f",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-30T22:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "76af804a-d17a-4b9f-90c2-a0e596348ed0",
+//     team2Id: "0dc0b187-d384-4fa0-9dba-58d25ef52473",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-01T13:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "174013c6-1c46-4259-b783-4802711ac53c",
+//     team2Id: "3ed86a3d-24c4-408d-a680-7b9949d8c556",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-01T17:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "fc406d8a-fc3d-47a8-94c9-61b4c64ed425",
+//     team2Id: "f55bad97-50f7-4d4c-a0d3-a15867fd3d55",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-01T21:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "35967464-e320-4919-aa17-1f08634e0973",
+//     team2Id: "98c9f94a-8813-4e88-bf3d-e695cd573ab5",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-02T16:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "541d0b65-e0c7-440c-b943-7663162e5905",
+//     team2Id: "64c883e1-7186-4de0-9ddb-a3a69914bccf",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-02T20:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "b8f83bd0-50d7-4356-b6c6-99b2de62bafa",
+//     team2Id: "619ef6da-ee56-416c-a8e4-19a1f55f4c3c",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-03T00:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "3088d5e5-ae6a-4b9f-a77e-ae0244e2351d",
+//     team2Id: "0ae6c99f-fe03-4fc1-9bc7-9098d6364231",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-03T15:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "76f0de61-fd7c-495f-bf93-ea7c1a0cfe75",
+//     team2Id: "cac069c0-7efa-42fe-8906-221d5ce5eb6e",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-03T19:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "48badd5b-defa-4a57-9caa-93cde68e91b2",
+//     team2Id: "6a64323a-45df-4ffa-9304-97f8af6f3dde",
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-03T22:30:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+// ];
+
+// (async () => {
+//   await prisma.match.createMany({
+//     data: matchesTest,
+//   });
+// })();
+const matches = [
   {
-    team1Id: "e47c69f0-bfd9-44fb-8300-829ea806401e",
-    team2Id: "eaf0a116-6b1c-4e28-989e-56538d08c294",
-    round: "16_avos",
-    matchDateTime: new Date("2026-06-28T16:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "a60c3370-16d1-4abd-bea6-9980beb3cff0",
-    team2Id: "f233b3b5-5ba3-4507-81a6-86e1c71beda8",
-    round: "16_avos",
-    matchDateTime: new Date("2026-06-29T14:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "7ef8d3f9-cf9b-45ed-844b-79be98f224f2",
-    team2Id: "751ed56f-65f5-41fa-bbf4-b6432c8b2b09",
-    round: "16_avos",
-    matchDateTime: new Date("2026-06-29T17:30:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "7cc81f71-8491-4e00-8947-7a95e18239c4",
-    team2Id: "f2f11145-276b-4e11-9bd4-28c0535923ed",
-    round: "16_avos",
-    matchDateTime: new Date("2026-06-29T22:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "f00bccac-2cdb-49fa-bbc7-5d5b08290739",
-    team2Id: "e95ff731-f466-4282-8e64-6e579a94a15f",
+    team1Id: "008bba04-505e-468a-b798-01f121954c93", // Senegal
+    team2Id: "0960c8ab-77f2-4c54-b099-2d0843895e4a", // Uruguai
     round: "16_avos",
     matchDateTime: new Date("2026-06-30T14:00:00"),
     score1: 0,
@@ -832,35 +948,35 @@ const matchesTest = [
     finished: false,
   },
   {
-    team1Id: "94084ee4-bfb8-4d3e-975d-ca238346934b",
-    team2Id: "ba2d31c3-ce78-40a8-b608-8e42b075b75e",
+    team1Id: "17f2f12b-5574-4504-af36-d2741ed7579e", // Curaçao
+    team2Id: "18793eaf-7fec-47bb-9c83-389cc4ad2a74", // Iraque
     round: "16_avos",
-    matchDateTime: new Date("2026-06-30T18:00:00"),
+    matchDateTime: new Date("2026-06-30T17:00:00"),
     score1: 0,
     score2: 0,
     finished: false,
   },
   {
-    team1Id: "e3c45336-df79-4f9b-bbd4-ad8ec35d9d13",
-    team2Id: "4b4acc12-66ce-4010-9756-f9850f51988f",
+    team1Id: "342a6f79-819f-4660-a0c5-23fee2eae833", // Escócia
+    team2Id: "470a94a0-935b-4fdd-aa32-61a02d66b576", // Coreia do Sul
     round: "16_avos",
-    matchDateTime: new Date("2026-06-30T22:00:00"),
+    matchDateTime: new Date("2026-06-30T20:00:00"),
     score1: 0,
     score2: 0,
     finished: false,
   },
   {
-    team1Id: "76af804a-d17a-4b9f-90c2-a0e596348ed0",
-    team2Id: "0dc0b187-d384-4fa0-9dba-58d25ef52473",
+    team1Id: "4cc65ca1-2926-437e-91bf-ef0f8379b050", // Argentina
+    team2Id: "54bfc9d8-3954-4298-b479-cfa67d478e50", // Arábia Saudita
     round: "16_avos",
-    matchDateTime: new Date("2026-07-01T13:00:00"),
+    matchDateTime: new Date("2026-07-01T14:00:00"),
     score1: 0,
     score2: 0,
     finished: false,
   },
   {
-    team1Id: "174013c6-1c46-4259-b783-4802711ac53c",
-    team2Id: "3ed86a3d-24c4-408d-a680-7b9949d8c556",
+    team1Id: "55954c7e-8e44-44ba-a383-71ebbbc14f7e", // Croácia
+    team2Id: "56256706-9c15-4600-9766-d8edba53d7d8", // Congo
     round: "16_avos",
     matchDateTime: new Date("2026-07-01T17:00:00"),
     score1: 0,
@@ -868,72 +984,17 @@ const matchesTest = [
     finished: false,
   },
   {
-    team1Id: "fc406d8a-fc3d-47a8-94c9-61b4c64ed425",
-    team2Id: "f55bad97-50f7-4d4c-a0d3-a15867fd3d55",
+    team1Id: "5f4c1576-324d-4a38-bf12-40d9ef9f1a20", // Gana
+    team2Id: "6238da06-4caa-4905-9bac-fce115300869", // Uzbequistão
     round: "16_avos",
-    matchDateTime: new Date("2026-07-01T21:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "35967464-e320-4919-aa17-1f08634e0973",
-    team2Id: "98c9f94a-8813-4e88-bf3d-e695cd573ab5",
-    round: "16_avos",
-    matchDateTime: new Date("2026-07-02T16:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "541d0b65-e0c7-440c-b943-7663162e5905",
-    team2Id: "64c883e1-7186-4de0-9ddb-a3a69914bccf",
-    round: "16_avos",
-    matchDateTime: new Date("2026-07-02T20:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "b8f83bd0-50d7-4356-b6c6-99b2de62bafa",
-    team2Id: "619ef6da-ee56-416c-a8e4-19a1f55f4c3c",
-    round: "16_avos",
-    matchDateTime: new Date("2026-07-03T00:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "3088d5e5-ae6a-4b9f-a77e-ae0244e2351d",
-    team2Id: "0ae6c99f-fe03-4fc1-9bc7-9098d6364231",
-    round: "16_avos",
-    matchDateTime: new Date("2026-07-03T15:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "76f0de61-fd7c-495f-bf93-ea7c1a0cfe75",
-    team2Id: "cac069c0-7efa-42fe-8906-221d5ce5eb6e",
-    round: "16_avos",
-    matchDateTime: new Date("2026-07-03T19:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "48badd5b-defa-4a57-9caa-93cde68e91b2",
-    team2Id: "6a64323a-45df-4ffa-9304-97f8af6f3dde",
-    round: "16_avos",
-    matchDateTime: new Date("2026-07-03T22:30:00"),
+    matchDateTime: new Date("2026-07-01T20:00:00"),
     score1: 0,
     score2: 0,
     finished: false,
   },
 ];
-
 (async () => {
   await prisma.match.createMany({
-    data: matchesTest,
+    data: matches,
   });
 })();
