@@ -26,6 +26,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 type EditMatchDialogProps = {
   open: boolean;
@@ -75,6 +76,7 @@ export function EditMatchDialog({
     const result = await updateMatchAction(values);
 
     if (!result.success) {
+      toast.error(result.message);
       return;
     }
 

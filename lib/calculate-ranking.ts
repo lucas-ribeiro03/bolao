@@ -52,14 +52,11 @@ export function calculateRanking({
         continue;
       }
 
-      console.log(match);
-
       if (
         match.score1 === null ||
         match.score2 === null ||
         match.finished !== true
       ) {
-        console.log(match.finished, typeof match.finished);
         continue;
       }
 
@@ -79,8 +76,6 @@ export function calculateRanking({
         points += 1;
       }
     }
-
-    console.log(points);
 
     return {
       id: user.id,

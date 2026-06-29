@@ -29,6 +29,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 type GuessFormProps = {
   matches: {
@@ -69,11 +70,10 @@ export function GuessForm({ matches }: GuessFormProps) {
   const guesses = watch("guesses");
 
   async function onSubmit(values: RoundGuessesSchema) {
-    console.log("Fui enviado");
     const result = await createRoundGuessesAction(values.guesses);
-    console.log(result);
 
     if (!result.success) {
+      toast.error(result.message);
       return;
     }
 
