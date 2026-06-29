@@ -5,11 +5,6 @@ import { cacheTag } from "next/cache";
 export async function getNextMatch() {
   cacheTag("next-match");
   return await prisma.match.findFirst({
-    where: {
-      matchDateTime: {
-        gte: new Date(),
-      },
-    },
     select: {
       id: true,
       matchDateTime: true,

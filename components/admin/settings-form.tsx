@@ -81,11 +81,11 @@ export function SettingsForm({ currentRound }: SettingsFormProps) {
               </SelectTrigger>
 
               <SelectContent>
-                {Array.from({ length: 12 }, (_, index) => (
-                  <SelectItem key={index + 1} value={(index + 1).toString()}>
-                    Rodada {index + 1}
-                  </SelectItem>
-                ))}
+                <SelectItem value="16_avos">16 Avos</SelectItem>
+                <SelectItem value="oitavas">Oitavas</SelectItem>
+                <SelectItem value="quartas">Quartas</SelectItem>
+                <SelectItem value="semis">Semifinal</SelectItem>
+                <SelectItem value="final">Final</SelectItem>
               </SelectContent>
             </Select>
           </div>
