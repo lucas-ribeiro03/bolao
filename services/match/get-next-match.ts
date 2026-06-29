@@ -32,5 +32,9 @@ export async function getNextMatch() {
     orderBy: {
       matchDateTime: "asc",
     },
+
+    where: {
+      finished: false,
+    },
   });
 }
