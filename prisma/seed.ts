@@ -937,64 +937,64 @@ import { GuessResult } from "@prisma/client";
 //     data: matchesTest,
 //   });
 // })();
-const matches = [
-  {
-    team1Id: "008bba04-505e-468a-b798-01f121954c93", // Senegal
-    team2Id: "0960c8ab-77f2-4c54-b099-2d0843895e4a", // Uruguai
-    round: "16_avos",
-    matchDateTime: new Date("2026-06-30T14:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "17f2f12b-5574-4504-af36-d2741ed7579e", // Curaçao
-    team2Id: "18793eaf-7fec-47bb-9c83-389cc4ad2a74", // Iraque
-    round: "16_avos",
-    matchDateTime: new Date("2026-06-30T17:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "342a6f79-819f-4660-a0c5-23fee2eae833", // Escócia
-    team2Id: "470a94a0-935b-4fdd-aa32-61a02d66b576", // Coreia do Sul
-    round: "16_avos",
-    matchDateTime: new Date("2026-06-30T20:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "4cc65ca1-2926-437e-91bf-ef0f8379b050", // Argentina
-    team2Id: "54bfc9d8-3954-4298-b479-cfa67d478e50", // Arábia Saudita
-    round: "16_avos",
-    matchDateTime: new Date("2026-07-01T14:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "55954c7e-8e44-44ba-a383-71ebbbc14f7e", // Croácia
-    team2Id: "56256706-9c15-4600-9766-d8edba53d7d8", // Congo
-    round: "16_avos",
-    matchDateTime: new Date("2026-07-01T17:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-  {
-    team1Id: "5f4c1576-324d-4a38-bf12-40d9ef9f1a20", // Gana
-    team2Id: "6238da06-4caa-4905-9bac-fce115300869", // Uzbequistão
-    round: "16_avos",
-    matchDateTime: new Date("2026-07-01T20:00:00"),
-    score1: 0,
-    score2: 0,
-    finished: false,
-  },
-];
-(async () => {
-  await prisma.match.createMany({
-    data: matches,
-  });
-})();
+// const matches = [
+//   {
+//     team1Id: "008bba04-505e-468a-b798-01f121954c93", // Senegal
+//     team2Id: "0960c8ab-77f2-4c54-b099-2d0843895e4a", // Uruguai
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-30T14:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "17f2f12b-5574-4504-af36-d2741ed7579e", // Curaçao
+//     team2Id: "18793eaf-7fec-47bb-9c83-389cc4ad2a74", // Iraque
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-30T17:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "342a6f79-819f-4660-a0c5-23fee2eae833", // Escócia
+//     team2Id: "470a94a0-935b-4fdd-aa32-61a02d66b576", // Coreia do Sul
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-06-30T20:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "4cc65ca1-2926-437e-91bf-ef0f8379b050", // Argentina
+//     team2Id: "54bfc9d8-3954-4298-b479-cfa67d478e50", // Arábia Saudita
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-01T14:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "55954c7e-8e44-44ba-a383-71ebbbc14f7e", // Croácia
+//     team2Id: "56256706-9c15-4600-9766-d8edba53d7d8", // Congo
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-01T17:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+//   {
+//     team1Id: "5f4c1576-324d-4a38-bf12-40d9ef9f1a20", // Gana
+//     team2Id: "6238da06-4caa-4905-9bac-fce115300869", // Uzbequistão
+//     round: "16_avos",
+//     matchDateTime: new Date("2026-07-01T20:00:00"),
+//     score1: 0,
+//     score2: 0,
+//     finished: false,
+//   },
+// ];
+// (async () => {
+//   await prisma.match.createMany({
+//     data: matches,
+//   });
+// })();
