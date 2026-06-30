@@ -12,6 +12,8 @@ import {
 
 import { Trophy } from "lucide-react";
 
+import { Plus } from "lucide-react";
+
 export default function AdminPage() {
   return (
     <div className="space-y-6">
@@ -38,56 +40,20 @@ export default function AdminPage() {
             </CardContent>
           </Card>
         </Link>
-        {/* 
-        <Link href="/admin/users">
+
+        <Link href="/admin/matches/new-match">
           <Card className="cursor-pointer transition-all hover:border-primary hover:shadow-md">
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-lg">Usuários</CardTitle>
-
-              <Users className="size-5" />
+              <CardTitle className="text-lg">Nova partida</CardTitle>
+              <Plus className="size-5" />
             </CardHeader>
 
             <CardContent>
-              <CardDescription>
-                Visualize e gerencie os participantes.
-              </CardDescription>
+              <CardDescription>Cadastrar uma nova partida.</CardDescription>
             </CardContent>
           </Card>
         </Link>
-
-        <Link href="/admin/teams">
-          <Card className="cursor-pointer transition-all hover:border-primary hover:shadow-md">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-lg">Seleções</CardTitle>
-
-              <Shield className="size-5" />
-            </CardHeader>
-
-            <CardContent>
-              <CardDescription>
-                Gerencie as seleções participantes.
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </Link>
-
-        <Link href="/admin/rounds">
-          <Card className="cursor-pointer transition-all hover:border-primary hover:shadow-md">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-lg">Rodadas</CardTitle>
-
-              <CalendarDays className="size-5" />
-            </CardHeader>
-
-            <CardContent>
-              <CardDescription>
-                Consulte e acompanhe as rodadas do torneio.
-              </CardDescription>
-            </CardContent>
-          </Card> */}
-        {/* {/* </Link> */}
-      </div>{" "}
-      */
+      </div>
     </div>
   );
 }
