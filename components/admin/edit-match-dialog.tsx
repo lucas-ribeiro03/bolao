@@ -131,6 +131,7 @@ export function EditMatchDialog({
 
           <div className="flex items-center gap-2">
             <Checkbox
+              // eslint-disable-next-line react-hooks/incompatible-library
               checked={watch("finished")}
               onCheckedChange={(checked) => setValue("finished", !!checked)}
             />

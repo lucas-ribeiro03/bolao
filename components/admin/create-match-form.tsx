@@ -41,7 +41,6 @@ export function CreateMatchForm({ teams }: CreateMatchFormProps) {
     handleSubmit,
     setValue,
     watch,
-    reset,
     register,
     formState: { errors, isSubmitting },
   } = useForm<CreateMatchSchema>({
@@ -87,6 +86,7 @@ export function CreateMatchForm({ teams }: CreateMatchFormProps) {
               <Label>Seleção 1</Label>
 
               <Select
+                // eslint-disable-next-line react-hooks/incompatible-library
                 value={watch("team1Id")}
                 onValueChange={(value) =>
                   setValue("team1Id", value, {

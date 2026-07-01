@@ -1,6 +1,7 @@
 // components/guesses/round-guesses.tsx
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GuessResult } from "@prisma/client";
 import { Loader2Icon } from "lucide-react";
 import { Suspense } from "react";
 
@@ -14,6 +15,7 @@ type RoundGuessesProps = {
       id: string;
       score1: number;
       score2: number;
+      result: GuessResult;
       match: {
         team1: {
           name: string;
@@ -40,7 +42,7 @@ export function RoundGuesses({ guesses }: RoundGuessesProps) {
               {userGuesses.guesses.map((guess) => (
                 <div
                   key={guess.id}
-                  className="flex items-center justify-between"
+                  className={`flex items-center justify-between ${guess.result === "EXACT_SCORE" ? "bg-green-800" : guess.result === "WINNER" ? "bg-amber-600" : guess.result === "WRONG" ? "bg-red-700" : null} px-2 py-1.5 rounded-sm`}
                 >
                   <span>
                     {guess.match.team1.name} x {guess.match.team2.name}

@@ -1,4 +1,5 @@
 import { prisma } from "@/prisma/prisma";
+import { GuessResult } from "@prisma/client";
 
 type RoundGuesses = {
   user: {
@@ -9,6 +10,7 @@ type RoundGuesses = {
     id: string;
     score1: number;
     score2: number;
+    result: GuessResult;
     match: {
       team1: {
         name: string;
