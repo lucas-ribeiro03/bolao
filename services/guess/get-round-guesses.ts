@@ -43,9 +43,10 @@ export async function getRoundGuesses(round: string): Promise<RoundGuesses[]> {
         },
       },
     },
+
     orderBy: {
-      user: {
-        username: "asc",
+      match: {
+        matchDateTime: "asc",
       },
     },
   });
