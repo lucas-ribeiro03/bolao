@@ -13,6 +13,7 @@ import { getNextMatch } from "@/services/match/get-next-match";
 import { getGuessByUserAndMatch } from "@/services/guess/get-guess-by-user-and-match";
 
 import { calculateRanking } from "@/lib/calculate-ranking";
+import { Footer } from "@/components/layout/footer";
 
 export default async function HomePage() {
   const session = await auth();
@@ -49,6 +50,7 @@ export default async function HomePage() {
       <RankingTable ranking={ranking} />
 
       <NextMatchCard match={nextMatch} guess={guess} />
+      <Footer />
     </div>
   );
 }
