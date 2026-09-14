@@ -1,272 +1,285 @@
-# 🏆 Bolão Copa 2026
+# Bolão Copa 2026
 
-Aplicação web para grupos de amigos disputarem um bolão de apostas esportivas. Os usuários enviam palpites para as partidas de cada rodada e concorrem em um ranking geral baseado nos acertos.
+Aplicação web para grupos de amigos disputarem um bolão de palpites sobre partidas da Copa do Mundo de 2026. Cada participante informa os placares previstos para os jogos da rodada atual e acompanha sua posição em um ranking geral calculado a partir dos resultados das partidas.
 
-**Demo:** [bolao-copa-nine-eta.vercel.app](https://bolao-copa-nine-eta.vercel.app)
+> Projeto desenvolvido para demonstrar conhecimentos em desenvolvimento full-stack, autenticação, regras de negócio, modelagem relacional, controle de acesso e construção de interfaces com Next.js.
 
----
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=20232A)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?logo=prisma)](https://www.prisma.io/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-## 📋 Visão Geral
+**Demonstração:** [bolao-copa-nine-eta.vercel.app](https://bolao-copa-nine-eta.vercel.app/)
 
-O Bolão Copa 2026 permite que usuários se cadastrem, façam login e enviem palpites de placar para os jogos da rodada que estiver aberta. Depois que todos os palpites de uma rodada são finalizados pelo administrador, o sistema calcula automaticamente a pontuação de cada palpite e atualiza a classificação geral.
+## Visão geral
 
-### Funcionalidades principais
+O participante cria uma conta ou acessa a aplicação com sua conta Google, consulta os jogos da rodada aberta e envia todos os seus palpites de uma só vez. Depois do envio, os palpites da rodada ficam bloqueados para edição. Quando o administrador informa o placar final de uma partida, o sistema classifica os palpites e atualiza o ranking.
 
-- Cadastro e autenticação de usuários
-- Envio de palpites por rodada (com bloqueio de edição após o envio)
-- Cálculo automático do resultado dos palpites quando um jogo é finalizado
-- Ranking geral dos participantes
-- Visualização dos palpites de outros usuários — liberada somente depois que o próprio usuário enviar todos os palpites da rodada
-- Histórico de jogos e resultados
-- Área administrativa para gerenciar seleções, jogos e a rodada atual
+O projeto possui uma área administrativa para cadastrar e editar partidas, definir a rodada atual e registrar os resultados oficiais. A aplicação também inclui páginas para o ranking geral, próximos jogos, histórico de partidas finalizadas e visualização controlada dos palpites dos participantes.
 
----
+## Funcionalidades
 
-## 🛠️ Stack Tecnológica
+### Participantes
 
-**Frontend**
-- [Next.js](https://nextjs.org) (App Router)
-- React
-- TypeScript
-- Tailwind CSS
-- [shadcn/ui](https://ui.shadcn.com)
-- Lucide React
+- Cadastro com nome de usuário, e-mail e senha.
 
-**Backend**
-- Next.js Server Actions
-- Next.js Route Handlers
+- Login por credenciais ou conta Google.
 
-**Banco de Dados**
-- PostgreSQL
-- Prisma ORM
-- Docker Compose (ambiente local)
+- Visualização da rodada atual e dos próximos jogos.
 
-**Autenticação**
-- Auth.js (NextAuth)
-- Credentials Provider (com hash de senha via bcrypt)
+- Envio de palpites para todos os jogos da rodada em uma única operação.
 
-**Hospedagem**
-- Aplicação: [Vercel](https://vercel.com)
-- Banco de dados: [Neon PostgreSQL](https://neon.tech)
+- Bloqueio automático do envio dez minutos antes do primeiro jogo da rodada.
 
----
+- Bloqueio de edição após o envio dos palpites.
 
-## 🎲 Regras do Jogo
+- Visualização dos palpites de outros participantes somente depois do envio dos próprios palpites da rodada.
 
-A pontuação de cada palpite é calculada comparando o placar informado pelo usuário com o resultado real da partida:
+- Ranking geral com pontuação e posição de cada participante.
 
-| Resultado do palpite | Condição                              | Pontos |
-|-----------------------|----------------------------------------|--------|
-| `EXACT_SCORE`         | Acertou o placar exato                 | 3      |
-| `WINNER`              | Acertou apenas o vencedor ou o empate  | 1      |
-| `WRONG`               | Errou                                  | 0      |
-| `PENDING`             | Jogo ainda não finalizado              | 0      |
+- Consulta de partidas finalizadas e seus resultados.
 
-> Acertar o placar exato concede apenas os 3 pontos — não soma pontos adicionais por também ter acertado o vencedor.
+### Administradores
 
-### Fluxo de palpites
+- Cadastro de partidas com seleções, rodada e data de início.
 
-1. O usuário acessa a tela de palpites.
-2. O sistema busca os jogos da rodada que está aberta (definida pelo administrador).
-3. O usuário informa o placar previsto para cada partida da rodada.
-4. O usuário envia todos os palpites de uma vez — não é possível enviar parcialmente.
-5. Os palpites são salvos e se tornam **imutáveis**.
+- Edição de partidas e atualização dos placares oficiais.
 
-### Bloqueio de envio
+- Finalização de partidas para disparar a atualização dos resultados dos palpites.
 
-Os palpites de uma rodada só podem ser enviados até **10 minutos antes** do início da primeira partida da rodada. Após esse prazo, o envio é bloqueado para todos os jogos daquela rodada.
+- Definição manual da rodada atualmente aberta.
 
-### Visualização dos palpites de outros usuários
+- Visualização das partidas organizadas por rodada.
 
-Um usuário só pode ver os palpites dos demais participantes em uma rodada depois de **enviar todos os seus próprios palpites** daquela rodada.
+- Controle de acesso baseado no papel `ADMIN`.
 
-### Recálculo automático
+## Regras de pontuação
 
-Sempre que um jogo é marcado como finalizado (`finished = true`) e seu placar é informado, o sistema recalcula automaticamente o resultado de todos os palpites vinculados àquele jogo. O ranking geral é calculado no frontend, somando os pontos de cada usuário.
+A pontuação é calculada somente para partidas finalizadas que possuem placar oficial. O ranking é ordenado pela quantidade total de pontos de cada participante.
 
----
+| Resultado do palpite | Condição | Pontos |
+| --- | --- | --- |
+| `EXACT_SCORE` | O placar previsto é exatamente igual ao placar oficial. | 3 |
+| `WINNER` | O participante acerta o vencedor ou o empate, mas erra o placar. | 1 |
+| `WRONG` | O resultado previsto não corresponde ao resultado oficial. | 0 |
+| `PENDING` | A partida ainda não foi finalizada. | 0 |
 
-## 🗄️ Modelagem do Banco de Dados
+Um placar exato vale três pontos e não acumula um ponto adicional pela previsão correta do vencedor ou empate.
 
-```prisma
-enum Role {
-  ADMIN
-  USER
-}
+## Regras do envio de palpites
 
-enum GuessResult {
-  PENDING
-  EXACT_SCORE
-  WINNER
-  WRONG
-}
+O sistema utiliza a primeira partida da rodada como referência para definir o prazo final de envio. O participante precisa enviar um palpite para cada partida da rodada. Envios parciais não são aceitos.
 
-model User {
-  id        String   @id @default(cuid())
-  username  String   @unique
-  email     String   @unique
-  password  String
-  role      Role     @default(USER)
-  guesses   Guess[]
-  createdAt DateTime @default(now())
-}
+O envio é bloqueado dez minutos antes do início da primeira partida da rodada. Depois que o participante envia todos os palpites, uma nova submissão para a mesma rodada é recusada. A visualização dos palpites de outros usuários também permanece restrita até que o participante conclua o próprio envio.
 
-model Team {
-  id        String  @id @default(cuid())
-  name      String  @unique
-  badgeUrl  String?
-  homeGames Match[] @relation("Team1")
-  awayGames Match[] @relation("Team2")
-}
+## Tecnologias utilizadas
 
-model Match {
-  id            String   @id @default(cuid())
-  team1Id       String
-  team2Id       String
-  team1         Team     @relation("Team1", fields: [team1Id], references: [id])
-  team2         Team     @relation("Team2", fields: [team2Id], references: [id])
-  round         String
-  matchDateTime DateTime
-  score1        Int?
-  score2        Int?
-  finished      Boolean  @default(false)
-  guesses       Guess[]
-  createdAt     DateTime @default(now())
+| Camada | Tecnologias |
+| --- | --- |
+| Interface e aplicação | Next.js 16, React 19, TypeScript |
+| Estilos e componentes | Tailwind CSS 4, shadcn/ui, Radix UI, Lucide React |
+| Formulários e validação | React Hook Form e Zod |
+| Autenticação | Auth.js/NextAuth.js, Credentials Provider e Google Provider |
+| Segurança de senhas | bcryptjs |
+| Persistência | PostgreSQL e Prisma ORM |
+| Arquitetura de backend | Server Actions e Route Handlers do Next.js |
+| Datas | date-fns |
+| Infraestrutura local | Docker Compose |
+| Hospedagem demonstrada | Vercel e Neon PostgreSQL |
 
-  @@index([round])
-  @@index([matchDateTime])
-}
+## Arquitetura do projeto
 
-model Guess {
-  id        String      @id @default(cuid())
-  userId    String
-  matchId   String
-  score1    Int
-  score2    Int
-  result    GuessResult @default(PENDING)
-  user      User        @relation(fields: [userId], references: [id])
-  match     Match       @relation(fields: [matchId], references: [id])
-  createdAt DateTime    @default(now())
+A aplicação utiliza o App Router do Next.js e separa responsabilidades entre páginas, componentes, Server Actions e services. Os componentes cuidam da apresentação, os schemas validam entradas, as actions coordenam operações do servidor e os services concentram consultas e regras de persistência.
 
-  @@unique([userId, matchId])
-  @@index([userId])
-  @@index([matchId])
-}
-
-model Settings {
-  id           String   @id @default(cuid())
-  currentRound String
-  updatedAt    DateTime @updatedAt
-}
+```
+.
+├── actions/        # Server Actions para autenticação, palpites, partidas e configurações
+├── app/            # Rotas, layouts e páginas do Next.js App Router
+├── components/    # Componentes de interface e formulários
+├── constants/     # Constantes de navegação e configuração visual
+├── hooks/          # Hooks reutilizáveis
+├── lib/            # Autenticação, ranking e utilitários
+├── prisma/         # Schema, migrations e cliente Prisma
+├── public/         # Imagens das seleções e arquivos estáticos
+├── schemas/        # Schemas de validação com Zod
+├── services/       # Acesso a dados organizado por entidade
+└── types/          # Tipos compartilhados e extensões da sessão
 ```
 
-A tabela `Settings` controla qual rodada está atualmente aberta para o envio de palpites — essa configuração é definida manualmente pelo administrador.
+### Entidades principais
 
----
+O banco de dados é composto por usuários, seleções, partidas, palpites e configurações da rodada atual.
 
-## 🗺️ Estrutura de Rotas
+| Entidade | Responsabilidade |
+| --- | --- |
+| `User` | Armazena participantes, credenciais e papel de acesso. |
+| `Team` | Representa as seleções que disputam as partidas. |
+| `Match` | Armazena rodada, data, seleções, placar e estado de finalização. |
+| `Guess` | Registra o palpite de um usuário para uma partida. |
+| `Settings` | Mantém a rodada atualmente aberta para palpites. |
 
-### Públicas
+A combinação entre usuário e partida é única na entidade `Guess`. Esse relacionamento impede que o mesmo participante registre mais de um palpite para a mesma partida.
 
-| Rota | Descrição |
-|------|-----------|
-| `/login` | Login |
-| `/register` | Cadastro de usuário |
+## Rotas principais
 
-### Privadas
+| Rota | Acesso | Descrição |
+| --- | --- | --- |
+| `/login` | Público | Login por credenciais. |
+| `/register` | Público | Cadastro de participante. |
+| `/` | Autenticado | Página inicial com ranking e próximos jogos. |
+| `/guess` | Autenticado | Envio e consulta dos palpites da rodada atual. |
+| `/ranking` | Autenticado | Ranking geral dos participantes. |
+| `/admin` | Administrador | Gerenciamento de partidas e resultados. |
+| `/admin/settings` | Administrador | Definição da rodada atualmente aberta. |
 
-| Rota | Descrição |
-|------|-----------|
-| `/` | Página inicial — ranking geral e próximo jogo |
-| `/guess` | Envio de palpites da rodada atual / visualização de palpites |
-| `/ranking` | Visualização do ranking geral |
+## Fluxo principal
 
-### Administrativa
+```mermaid
+flowchart LR
+    A[Usuário cria conta ou faz login] --> B[Consulta a rodada atual]
+    B --> C[Informa os placares previstos]
+    C --> D{Prazo encerrado?}
+    D -- Sim --> E[Envio bloqueado]
+    D -- Não --> F[Envia todos os palpites]
+    F --> G[Palpites ficam imutáveis]
+    G --> H[Administrador registra o placar final]
+    H --> I[Partida é finalizada]
+    I --> J[Palpites são classificados]
+    J --> K[Ranking é recalculado]
+```
 
-| Rota | Descrição |
-|------|-----------|
-| `/admin` | Restrita a usuários com role `ADMIN`. Permite definir a rodada atual para palpites e informar o resultado / finalizar partidas |
-| `/admin/settings` | Atualização da rodada atual |
+## Pré-requisitos
 
----
+Para executar o projeto localmente, instale:
 
-## 🚀 Como Executar Localmente
+- Node.js 20.x.
 
-### Pré-requisitos
+- npm.
 
-- Node.js 20.x
-- Docker e Docker Compose (para o banco de dados PostgreSQL local)
+- Docker e Docker Compose, ou um banco PostgreSQL compatível.
 
-### Passo a passo
+- Credenciais OAuth do Google caso o login social seja utilizado.
+
+## Instalação e execução
+
+### 1. Clone o repositório
 
 ```bash
-# Clone o repositório
 git clone https://github.com/lucas-ribeiro03/bolao.git
 cd bolao
+```
 
-# Instale as dependências
+### 2. Instale as dependências
+
+```bash
 npm install
+```
 
-# Suba o banco de dados PostgreSQL via Docker
+O projeto executa `prisma generate` automaticamente no `postinstall`.
+
+### 3. Inicie o PostgreSQL
+
+O repositório inclui um PostgreSQL 15 configurado para desenvolvimento local:
+
+```bash
 docker compose up -d
+```
 
-# Configure as variáveis de ambiente
-cp .env.example .env
-# edite o .env com a sua DATABASE_URL e demais variáveis necessárias
+A configuração padrão do container é:
 
-# Execute as migrations do Prisma
+| Campo | Valor |
+| --- | --- |
+| Usuário | `postgres` |
+| Senha | `password` |
+| Banco | `bolao` |
+| Porta | `5432` |
+
+### 4. Configure as variáveis de ambiente
+
+O repositório atual não contém um arquivo `.env.example`. Crie um arquivo `.env` na raiz com, no mínimo, a conexão do banco e as variáveis do Auth.js:
+
+```
+DATABASE_URL="postgresql://postgres:password@localhost:5432/bolao"
+AUTH_SECRET="uma-chave-secreta-forte"
+
+AUTH_GOOGLE_ID="seu-client-id-do-google"
+AUTH_GOOGLE_SECRET="seu-client-secret-do-google"
+```
+
+Para usar somente login por credenciais, o banco e `AUTH_SECRET` continuam sendo necessários; as variáveis do Google podem ser omitidas se o Provider do Google não for utilizado no ambiente.
+
+> Nunca versione o arquivo `.env` nem credenciais de provedores externos.
+
+### 5. Aplique as migrations
+
+```bash
 npx prisma migrate dev
+```
 
-# Inicie o servidor de desenvolvimento
+O projeto possui migrations versionadas em `prisma/migrations`. Os dados de seleções e partidas usados no desenvolvimento devem ser cadastrados pelo painel administrativo ou por um script de carga próprio.
+
+### 6. Inicie o servidor
+
+```bash
 npm run dev
 ```
 
 Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
-> **Nota:** se o arquivo `.env.example` não existir no repositório, crie um `.env` na raiz do projeto com, no mínimo, a variável `DATABASE_URL` apontando para o banco PostgreSQL (local ou Neon) e as variáveis exigidas pelo Auth.js.
-
-### Scripts disponíveis
+## Scripts disponíveis
 
 | Comando | Descrição |
-|---------|-----------|
-| `npm run dev` | Inicia o servidor de desenvolvimento |
-| `npm run build` | Gera o build de produção |
-| `npm run start` | Inicia o servidor em modo produção |
+| --- | --- |
+| `npm run dev` | Inicia o servidor de desenvolvimento. |
+| `npm run build` | Gera o build de produção. |
+| `npm run start` | Inicia o servidor em modo de produção. |
+| `npm run lint` | Executa o ESLint. |
+| `npx prisma migrate dev` | Aplica ou cria migrations no ambiente de desenvolvimento. |
+| `npx prisma studio` | Abre uma interface visual para consultar o banco. |
 
----
+## Decisões técnicas demonstradas
 
-## 📁 Estrutura do Projeto
+A aplicação usa Server Actions para operações de escrita, mantendo a execução das regras de negócio no servidor. A camada de services evita consultas Prisma diretamente nos componentes e organiza o acesso aos dados por entidade.
 
-```
-.
-├── app/            # Rotas e páginas (Next.js App Router)
-├── components/      # Componentes React (composições sobre shadcn/ui)
-├── constants/        # Constantes da aplicação
-├── hooks/            # Hooks customizados
-├── lib/              # Utilitários e configurações gerais
-├── prisma/           # Schema e migrations do banco de dados
-├── schemas/          # Schemas de validação (Zod)
-├── services/         # Camada de acesso ao banco — uma pasta por entidade
-├── types/            # Tipagens TypeScript compartilhadas
-└── public/           # Arquivos estáticos
-```
+A autenticação combina Auth.js com o Prisma Adapter, sessões JWT e dois métodos de acesso: credenciais com senha protegida por hash e login social com Google. O papel do usuário é incluído na sessão para controlar o acesso ao painel administrativo.
 
-A aplicação segue o padrão de **services** para acesso ao banco de dados — nenhuma consulta Prisma é feita diretamente em componentes. Todas as operações de escrita são implementadas como **Server Actions**.
+O ranking é calculado a partir de partidas finalizadas e palpites associados. O modelo de dados utiliza índices por rodada, data, usuário e partida para favorecer consultas frequentes da aplicação.
 
----
+## Possíveis evoluções
 
-## 🎨 Padrões de Interface
+Como próximos passos, o projeto pode evoluir com testes automatizados para as regras de pontuação, uma carga inicial oficial de seleções e partidas, paginação no painel administrativo, desempate documentado no ranking, notificações de resultados e uma pipeline de CI para lint, build e testes.
 
-Toda a interface é construída utilizando componentes do **shadcn/ui**, com estilização via **Tailwind CSS**. Formulários utilizam **React Hook Form** + **Zod** para validação, e modais seguem os componentes `Dialog`, `AlertDialog` ou `Sheet` do shadcn/ui.
+## Deploy
 
----
+A demonstração pública está hospedada na [Vercel](https://vercel.com/). O README original informa o uso do [Neon](https://neon.tech/) como provedor PostgreSQL para o ambiente publicado.
 
-## 📦 Deploy
+## Licença
 
-A aplicação está hospedada na **Vercel**, com o banco de dados PostgreSQL hospedado no **Neon**.
+Este projeto é disponibilizado exclusivamente para demonstração e avaliação. Conforme o arquivo [`LICENSE`](./LICENSE), todos os direitos são reservados ao autor. Não é permitida a cópia, modificação, distribuição ou reutilização do código sem autorização prévia e expressa.
 
----
+## Autor
 
-## 📄 Licença
+Desenvolvido por **Lucas Ribeiro**.
 
-Este projeto não possui licença definida até o momento.
+- GitHub: [@lucas-ribeiro03](https://github.com/lucas-ribeiro03)
+
+- Repositório: [bolao](https://github.com/lucas-ribeiro03/bolao)
+
+- Demonstração: [bolao-copa-nine-eta.vercel.app](https://bolao-copa-nine-eta.vercel.app/)
+
+## Referências
+
+[1]: https://nextjs.org/docs "Documentação do Next.js"
+
+[2]: https://www.prisma.io/docs "Documentação do Prisma"
+
+[3]: https://authjs.dev/ "Documentação do Auth.js"
+
+[4]: https://docs.docker.com/compose/ "Documentação do Docker Compose"
+
+[5]: https://vercel.com/docs "Documentação da Vercel"
+
+[6]: https://neon.tech/docs "Documentação do Neon"
+
+As tecnologias e serviços citados nesta documentação podem ser consultados nas referências oficiais [1] [2] [3] [4] [5] [6].
